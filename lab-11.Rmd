@@ -1,7 +1,7 @@
 ---
 title: "Lab 11 - Grading the professor, Pt. 2"
-author: "Insert your name here"
-date: "Insert date here"
+author: "Allison Li"
+date: "04282025"
 output: github_document
 ---
 
@@ -10,6 +10,7 @@ output: github_document
 ```{r load-packages, message=FALSE}
 library(tidyverse) 
 library(tidymodels)
+library(broom)
 library(openintro)
 ```
 
@@ -18,19 +19,53 @@ library(openintro)
 *Provide your answer here.*  
 Add code chunks as needed. Ensure code chunks are properly labeled without spaces.
 
-```{r exercise1_code}
-# Add your R code here
+```{r exercise1}
+m_bty <- lm(
+  score ~ bty_avg,
+  data = evals
+)
+summary(m_bty)
 ```
 
 ## Exercise 2
 
-*Provide your answer here.*  
-Add code chunks as needed.
-
-```{r exercise2_code}
-# Add your R code here
+```{r exercise2}
+m_bty_gen <- lm(score ~ bty_avg + gender, data = evals)
+summary(m_bty_gen)
 ```
 
-## Additional Exercises
+## Exercise 3
 
-*Repeat the format above for additional exercises.*
+The intercept represents the predicted professor course evaluation score when the average beauty rating is 0 and when the professor is female. The bty_avg slope indicates that for one point increase in average beauty rating, the professor course evaluation score will increase by about 0.074 points, when gender is hold constant. The gender slope indicates that a male professor is predicted to have a 0.172 point higher evaluation score than a female professor on average, when holding beauty score as constant.
+
+## Exercise 4
+
+According to the output table, the R-squared value is .06. Therefore, About 6% of the variability in professors' evaluation scores can be explained by the model m_bty_gen.
+
+## Exercise 5
+
+The line for male: score = 3.747 + .172 + .074 x bty_avg
+
+## Exercise 6
+
+Male professor tends to have the higher course evaluation score when they receive the same appearance rating 
+
+## Exercise 7
+
+```{r interaction included}
+m_bty_gen_interaction <- lm(score ~ bty_avg * gender, data = evals)
+summary(m_bty_gen_interaction)
+```
+By including the interaction effect between the two predictors:
+
+Male professors:
+score = 3.95 - .18 x 1 + .03 x bty_avg + .08 x 1 x bty_avg = 3.77 + .11 x bty_av
+
+Female professors:
+score = 3.95 - .18 x 0 + .03 x bty_avg + .08 x 0 x bty_avg = 3.95 + .03 x bty_avg
+
+According to the functions, for male professor, one point increase in beauty score will increase 3.88 points increase in overall course evaluation scores. For female professors, one point increase in beauty score will increase 3.98 points increase in overall course evaluation scores. 
+
+## Exercise 8
+
+
