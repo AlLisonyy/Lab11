@@ -53,8 +53,8 @@ Male professor tends to have the higher course evaluation score when they receiv
 ## Exercise 7
 
 ```{r interaction included}
-m_bty_gen_interaction <- lm(score ~ bty_avg * gender, data = evals)
-summary(m_bty_gen_interaction)
+m_bty_gen <- lm(score ~ bty_avg * gender, data = evals)
+summary(m_bty_gen)
 ```
 By including the interaction effect between the two predictors:
 
@@ -67,5 +67,71 @@ score = 3.95 - .18 x 0 + .03 x bty_avg + .08 x 0 x bty_avg = 3.95 + .03 x bty_av
 According to the functions, for male professor, one point increase in beauty score will increase 3.88 points increase in overall course evaluation scores. For female professors, one point increase in beauty score will increase 3.98 points increase in overall course evaluation scores. 
 
 ## Exercise 8
+
+The adjust R squared value for m_bty_gen_new (the one with interaction effect) is .065, while for m_bty is .033. The R squared value is almost twice larger after including gender as a predictor of the course evaluation score. This indicates that the new model explains more variability in evaluation scores, and that gender is a strong predictor of evaluation scores beyond what beauty alone can explain.
+
+## Exercise 9
+
+The slopes of bty_avg for m_bty is .67; The slopes of bty_avg for m_bty_gen_new is .31. Therefore, the slope value has decreased after adding genedr as a predictor. 
+
+## Exercise 10
+
+```{r}
+m_bty_rank <- lm(score ~ bty_avg * rank, data = evals)
+summary(m_bty_rank)
+```
+
+The intercept represents the predicted professor course evaluation score when the average beauty rating is 0 and when the professor is not on tenure track. The bty_avg slope indicates that for one point increase in average beauty rating, the professor course evaluation score will increase by about 0.042 points, when the professor's rank is hold constant. The rank tenure track slope indicates that professors on tenure track has a 0.172 point lower evaluation score than a professor not on tenure track on average, when holding beauty score as constant. The rank tenured slope suggests that tenured professors has a .41 point lower evaluation rating than a professor not on a tenured tract, when holding beauty score constant. ty_avg:ranktenure track slope suggests that for professors on the tenure track, the relationship between beauty and evaluation score is 0.03 point lower compared to non-tenure track professors. The bty_avg:ranktenured slope suggests that for tenured professors, the relationship between beauty and evaluation score is 0.07 point higher compared to non-tenure track professors.
+
+# Part 3
+## Exercise 11
+
+I think cls_perc_eval would be the worst predictor of evaluation scores. Because I do not think it is related with how students will individually evaluate the class or the professor. 
+
+## Exercise 12
+
+```{r}
+cls_perc <- lm(score ~ cls_perc_eval, data = evals)
+summary(cls_perc)
+```
+
+According to the output, cls_perc_eval is a statistically significant predictor of course evaluation rating. This is unexpected and a little confusing but also potentially make sense?? 
+
+## Exercise 13
+
+I think I should not include cls_did_eval because it shows the number of students in class who has completed evaluation, which is the calculation of the two variables that planned to be included. 
+
+## Exercise 14
+
+```{r everything all at once}
+everything <- lm(score ~ rank + ethnicity + gender + language + age + cls_perc_eval + cls_students + cls_level + cls_profs + cls_credits + bty_avg, data = evals)
+summary(everything)
+```
+
+## Exercise 15
+
+```{r backword}
+backward_model <- stats::step(object = everything, direction = "backward", trace = 1)
+summary(backward_model)
+
+```
+
+According to the output, it seems like that the best model would be:
+
+score = 3.45 + .2 x ethnicity + .18 x gender - .16 x language - .01 x age + .01 x cls_perc_eval + .52 x cls_credits + .065 x bty_avg
+
+## Exercise 16
+
+For ethnicity as predictor, while holding all other predictors constant, professors who were not racial minorities were predicted to have .2 point higher course evaluation scores than minority professors on average. 
+
+For age as predictor, while holding all other predictors constant, one year older in age can predict .01 point lower course evaluation scores on average. 
+
+## Exercise 17
+
+based on the model, a higher evaluation score professor would be a white male who has recevied education in english, who is relatively younger, have higher percent of students in class who completed evaluation, and is rated as more good looking. 
+
+## Exercise 18
+
+I am not really comfortable with generalizing this conclusion at any university. I think the results would depends on the students at different institutions, even within certain department. I do not think the sample is representative or generalizable to any universities Additionally, the R squared value suggests that all the predictors here can only explain 15.8% of the variability in the scores, 
 
 
