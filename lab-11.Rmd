@@ -132,6 +132,7 @@ based on the model, a higher evaluation score professor would be a white male wh
 
 ## Exercise 18
 
-I am not really comfortable with generalizing this conclusion at any university. I think the results would depends on the students at different institutions, even within certain department. I do not think the sample is representative or generalizable to any universities Additionally, the R squared value suggests that all the predictors here can only explain 15.8% of the variability in the scores, 
+I am not really comfortable with generalizing this conclusion at any university. I think the results would depends on the students at different institutions, even within certain department. I do not think the sample is representative or generalizable to any universities. Additionally, the R squared value suggests that all the predictors here can only explain 15.8% of the variability in the scores, which was not a lot?
 
 
+In general, I really like this lab and found it interesting. I think all the questions are instructions are clear, logical, engaging and helped me to learn regression model better in R. I do not have much suggestion or advice on this lab because I think it is a really good one! The only suggestion is that we can try to add one question to ask the visual representation? The question can be: Choose one or two predictors from your model and create a scatterplot or boxplot to visualize their relationship with evaluation score. What does the visual tell you that complements (or contrasts with) the regression results?
